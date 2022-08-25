@@ -1,25 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import CodeEditor from "./components/CodeEditor/CodeEditor";
+import "./App.css";
 
-function App() {
+// Code Editor
+// Resizable split view
+// Collapsible editor views
+// Multiple views
+
+const App = () => {
+  const [html, setHtml] = useState("");
+  const [css, setCss] = useState("");
+  const [js, setJs] = useState("");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="editor-container">
+        <CodeEditor
+          lang="HTML"
+          onDocumentChange={(doc) => {
+            const { text } = doc;
+            setHtml(text.join("\n"));
+          }}
+        />
+        <CodeEditor
+          lang="CSS"
+          onDocumentChange={(doc) => {
+            const { text } = doc;
+            setCss(text.join("\n"));
+          }}
+        />
+        <CodeEditor
+          lang="JS"
+          onDocumentChange={(doc) => {
+            const { text } = doc;
+            setJs(text.join("\n"));
+          }}
+        />
+      </div>
+      <div>
+        <iframe
+          srcDoc={`<html>
+                    <head><style>${css}</style></head>
+                    <body>${html}</body>
+                    <script>${js}</script>
+                   </html>
+                 `}
+          title="output"
+          sandbox="allow-scripts"
+          frameBorder="0"
+          width="100%"
+          height="100%"
+        />
+      </div>
     </div>
   );
-}
+};
 
 export default App;
