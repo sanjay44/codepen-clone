@@ -18,7 +18,6 @@ const CodeEditor = ({ lang, onDocumentChange, defaultDoc }) => {
   const listener = ({ view, docChanged, state }) => {
     if (docChanged) {
       const { doc } = state;
-      console.log(doc, state);
       handleDocumentChange(doc);
     }
   };
