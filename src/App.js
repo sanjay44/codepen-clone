@@ -8,7 +8,7 @@ import "./App.css";
 // Multiple views
 
 const App = () => {
-  const [html, setHtml] = useState("");
+  const [html, setHtml] = useState("<h1>Code your idea here!</h1>");
   const [css, setCss] = useState("");
   const [js, setJs] = useState("");
 
@@ -34,13 +34,14 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className="app-container">
       <div className="editor-container">
         <CodeEditor
           lang="HTML"
           onDocumentChange={(doc) => {
             onDocumentChange(doc, "HTML");
           }}
+          defaultDoc={html}
         />
         <CodeEditor
           lang="CSS"
@@ -55,7 +56,7 @@ const App = () => {
           }}
         />
       </div>
-      <div>
+      <div className="iframe-container">
         <iframe
           srcDoc={`<html>
                     <head><style>${css}</style></head>

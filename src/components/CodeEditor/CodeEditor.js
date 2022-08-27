@@ -10,7 +10,7 @@ import debounce from "lodash.debounce";
 import { oneDark } from "@codemirror/theme-one-dark";
 import "./CodeEditor.css";
 
-const CodeEditor = ({ lang, onDocumentChange }) => {
+const CodeEditor = ({ lang, onDocumentChange, defaultDoc }) => {
   const handleDocumentChange = debounce((doc) => {
     onDocumentChange(doc);
   }, 300);
@@ -71,6 +71,7 @@ const CodeEditor = ({ lang, onDocumentChange }) => {
       EditorView.updateListener.of(listener),
       languageExtension(lang),
     ],
+    defaultDoc,
   });
 
   return (
