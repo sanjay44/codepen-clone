@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CodeEditor from "./components/CodeEditor/CodeEditor";
 import "./App.css";
+import SplitView from "./components/SplitView/SplitView";
 
 // Code Editor
 // Resizable split view
@@ -11,6 +12,16 @@ const App = () => {
   const [html, setHtml] = useState("");
   const [css, setCss] = useState("");
   const [js, setJs] = useState("");
+
+  return (
+    <SplitView
+      style={{ backgroundColor: "lightblue", padding: "4px", height: "200px" }}
+    >
+      <div style={{ backgroundColor: "yellow" }}>Page 1</div>
+      <div style={{ backgroundColor: "yellow" }}>Page 2</div>
+      <div style={{ backgroundColor: "yellow" }}>Page 3</div>
+    </SplitView>
+  );
 
   return (
     <div>
