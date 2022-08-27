@@ -12,28 +12,46 @@ const App = () => {
   const [css, setCss] = useState("");
   const [js, setJs] = useState("");
 
+  const onDocumentChange = (doc, lang) => {
+    const { text, children } = doc;
+    let documentString = "";
+    if (text) {
+      // Handle TextLeaf
+      documentString = text.join("\n");
+    } else {
+      // Handle TextNode - array of TextLeaf(s)
+      documentString = children.reduce((acc, curr) => {
+        return acc + curr.text.join("\n");
+      }, "");
+    }
+    if (lang === "JS") {
+      setJs(documentString);
+    } else if (lang === "HTML") {
+      setHtml(documentString);
+    } else if (lang === "CSS") {
+      setCss(documentString);
+    }
+  };
+
   return (
     <div>
       <div className="editor-container">
         <CodeEditor
           lang="HTML"
           onDocumentChange={(doc) => {
-            const { text } = doc;
-            setHtml(text.join("\n"));
+            onDocumentChange(doc, "HTML");
           }}
         />
         <CodeEditor
           lang="CSS"
           onDocumentChange={(doc) => {
-            const { text } = doc;
-            setCss(text.join("\n"));
+            onDocumentChange(doc, "CSS");
           }}
         />
         <CodeEditor
           lang="JS"
           onDocumentChange={(doc) => {
-            const { text } = doc;
-            setJs(text.join("\n"));
+            onDocumentChange(doc, "JS");
           }}
         />
       </div>

@@ -6,8 +6,8 @@
   border: 1px solid #2f2f2f;
   border-top: none;
   border-bottom: none;
-  resize: horizontal;
-  overflow: auto;
+  /* resize: horizontal;
+  overflow: auto; */
 }
 
 .editor-header {
