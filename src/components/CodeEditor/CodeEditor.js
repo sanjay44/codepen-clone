@@ -9,6 +9,9 @@ import { keymap } from "@codemirror/view";
 import debounce from "lodash.debounce";
 import { oneDark } from "@codemirror/theme-one-dark";
 import "./CodeEditor.css";
+import htmlIcon from "../../assets/html.png";
+import cssIcon from "../../assets/css.png";
+import jsIcon from "../../assets/js.png";
 
 const CodeEditor = ({ lang, onDocumentChange, defaultDoc }) => {
   const handleDocumentChange = debounce((doc) => {
@@ -35,14 +38,14 @@ const CodeEditor = ({ lang, onDocumentChange, defaultDoc }) => {
     }
   };
 
-  const getLanguageSymbol = (lang) => {
+  const getLanguageIcon = (lang) => {
     switch (lang) {
       case "JS":
-        return "( )";
+        return jsIcon;
       case "HTML":
-        return "<>";
+        return htmlIcon;
       case "CSS":
-        return "{ }";
+        return cssIcon;
       default:
         return "[]";
     }
@@ -76,12 +79,12 @@ const CodeEditor = ({ lang, onDocumentChange, defaultDoc }) => {
   return (
     <div className="editor">
       <div className="editor-header">
-        <div className="editor-header-title">
-          <span
-            className="editor-lang-icon"
-            style={{ backgroundColor: `${getLanguageIconColor(lang)}` }}
-          >
-            {getLanguageSymbol(lang)}
+        <div
+          className="editor-header-title"
+          // style={{ borderLeft: `4px solid ${getLanguageIconColor(lang)}` }}
+        >
+          <span className="editor-lang-icon">
+            <img src={getLanguageIcon(lang)} alt={lang} width="20px" />
           </span>
           <span>{lang}</span>
         </div>
